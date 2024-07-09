@@ -1,12 +1,19 @@
 # Script to run all of the V3.2.0 ini files
 
+# Using correct Hector version
+options(download.file.method = "wininet") # Line to make this work on Windows
+remotes::install_github("jgcri/hector@v3.2.0")
+stopifnot(packageVersion("hector") == "3.2.0")
+
 # Imports and constants
 library(hector)
 library(tidyr)
 
 VERSION_DIR <- here::here("hector-v3.2.0")
 INPUT_DIR <- file.path(VERSION_DIR, "input")
-OUTPUT_FILE <- file.path(VERSION_DIR, "output-V3.2.0.csv")
+
+OUTPUT_DIR <- here::here("output")
+OUTPUT_FILE <- file.path(OUTPUT_DIR, "output-V3.2.0.csv")
 
 VARIABLES <- c(GLOBAL_TAS(), GMST(), 
                RF_TOTAL(), 
@@ -39,8 +46,10 @@ for (name in ini_names) {
 }
 
 # Adding relevant columns
-comb_results$version <- "3.2.0"
-comb_results$commit  <- "1ef0b4d"
+comb_results$version <- packageVersion("hector")
+
+desc <- packageDescription("hector")
+comb_results$commit <- substring(desc$RemoteSha, 1, 6)
 
 # Reordering cols
 comb_results <- comb_results[,c(ncol(comb_results) - 1, 
