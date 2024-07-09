@@ -1,7 +1,7 @@
 # Script to run all of the V3.2.0 ini files
 
 # Using correct Hector version
-options(download.file.method = "wininet") # Line to make this work on Windows
+# options(download.file.method = "wininet") # Line to make this work on Windows
 remotes::install_github("jgcri/hector@v3.2.0")
 stopifnot(packageVersion("hector") == "3.2.0")
 
