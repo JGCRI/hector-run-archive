@@ -10,9 +10,7 @@ SSPs : ssp119, ssp126, ssp245, ssp370, ssp434, ssp460, ssp534-over, ssp585
 Idealized : 1pctCO2-4xext, 1pctCO2, abruptx0p5CO2, abruptx2CO2, abruptx4CO2, piControl, impulsex2CO2
 
 
-| Hector Release  | RCPs  | SSPs  | Idealized |
+| Hector Release  | RCPs  | SSPs  | Idealized | 
 |:----------------|------:|------:|----------:|
 | v3.2.0          |       |   X   |    X      |
-| V3.1.1          |       |       |           |
-| v3.1.0          |       |       |           |
-| v3.0.1          |       |       |           | 
+| V3.5.0          |       |   X   |    X      |
