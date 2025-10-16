@@ -4,9 +4,9 @@
 # Using correct Hector version
 
 devtools::load_all("~/Documents/Hector-WD/hector/")
-# remotes::install_github("jgcri/hector@v3.2.0")
-# TODO this will need to be updated to the correct versioN! 
-stopifnot(packageVersion("hector") == "3.4.95")
+# remotes::install_github("jgcri/hector@v3.5.0")
+# TODO this will need to be updated to the correct version! 
+stopifnot(packageVersion("hector") == "3.5.0")
 
 # Imports and constants
 library(dplyr)
@@ -19,10 +19,7 @@ INPUT_DIR <- file.path(VERSION_DIR, "input")
 OUTPUT_DIR <- here::here("output")
 OUTPUT_FILE <- file.path(OUTPUT_DIR, "output-V3.5.0.csv")
 
-VARIABLES <- c(GLOBAL_TAS(), GMST(), LAND_TAS(), RF_TOTAL(), CONCENTRATIONS_CO2(), RF_CO2(), 
-               NPP(), VEG_C(), SOIL_C(), DETRITUS_C(), SST(), HEAT_FLUX(), SST_HL(), 
-               SST_LL(),  OCEAN_C_HL(), OCEAN_C_LL(), OCEAN_C_IO(), OCEAN_C_DO(), 
-               CONCENTRATIONS_CH4(), HL_OCEAN_UPTAKE(), OCEAN_UPTAKE())
+VARIABLES <- ALL_VARS()
 YEARS <- 1750:2300
 
 # Function to run Hector with a given ini file
@@ -80,8 +77,6 @@ fetchvars(core,
 comb_results <- rbind(results1, results2, results3)
 version      <- packageVersion("hector")
 desc   <- packageDescription("hector")
-# TODO fix this 
-#commit <-  substring(desc$RemoteSha, 1, 6)
 commit <- NULL
 
 results <- bind_cols(version = version,
