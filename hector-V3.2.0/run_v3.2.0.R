@@ -3,12 +3,13 @@
 # 0. Set Up --------------------------------------------------------------------
 # Using correct Hector version
 # options(download.file.method = "wininet") # Line to make this work on Windows
-remotes::install_github("jgcri/hector@v3.2.0")
+remotes::install_github("jgcri/hector@main")
 stopifnot(packageVersion("hector") == "3.2.0")
 
 # Imports and constants
 library(hector)
 library(tidyr)
+library(dplyr)
 
 VERSION_DIR <- here::here("hector-v3.2.0")
 INPUT_DIR <- file.path(VERSION_DIR, "input")
@@ -16,10 +17,20 @@ INPUT_DIR <- file.path(VERSION_DIR, "input")
 OUTPUT_DIR <- here::here("output")
 OUTPUT_FILE <- file.path(OUTPUT_DIR, "output-V3.2.0.csv")
 
-VARIABLES <- c(GLOBAL_TAS(), GMST(), LAND_TAS(), RF_TOTAL(), CONCENTRATIONS_CO2(), RF_CO2(), 
-               NPP(), VEG_C(), SOIL_C(), DETRITUS_C(), SST(), HEAT_FLUX(), SST_HL(), 
-               SST_LL(),  OCEAN_C_HL(), OCEAN_C_LL(), OCEAN_C_IO(), OCEAN_C_DO(), 
-               CONCENTRATIONS_CH4(), HL_OCEAN_UPTAKE(), OCEAN_UPTAKE())
+VARIABLES <- c("TAU_OH", "CH4_concentration", "O3_concentration", "N2O_concentration", "HL_ocean_uptake", "LL_ocean_uptake",  
+               "DO_ocean_c", "HL_ocean_c", "IO_ocean_c", "LL_ocean_c", "HL_DIC", "LL_DIC",           
+               "ocean_uptake", "HL_PCO2", "LL_PCO2", "HL_pH", "LL_pH", "HL_sst",           
+               "LL_sst", "ocean_c", "HL_CO3", "LL_CO3", "NBP", "NPP",              
+               "RH", "rh_ch4", "CO2_concentration", "atmos_co2", "veg_c", "detritus_c",       
+               "soil_c", "permafrost_c", "thawedp_c", "f_frozen", "earth_c", "global_tas",       
+               "gmst", "heatflux_mixed", "heatflux_interior", "heatflux", "land_tas", "sst",              
+               "RF_BC", "FadjC2F6", "FadjCCl4", "FadjCF4", "FadjCFC11", "FadjCFC113",         
+               "FadjCFC114", "FadjCFC115", "FadjCFC12", "FadjCH3Br", "FadjCH3CCl3", "FadjCH3Cl",         
+               "FCH4", "RF_CO2", "RF_H2O_strat", "FadjHCFC141b", "FadjHCFC142b", "FadjHCFC22",        
+               "FadjHFC125", "FadjHFC134a", "FadjHFC143a", "FadjHFC227ea", "FadjHFC23", "FadjHFC245fa",      
+               "FadjHFC32", "FadjHFC4310", "RF_N2O", "RF_NH3", "RF_O3_trop", "RF_OC",            
+               "FadjSF6", "RF_SO2","RF_aci","RF_albedo", "Fadjhalon1211", "Fadjhalon1301",     
+               "Fadjhalon2402", "RF_misc", "RF_tot", "RF_vol")
 YEARS <- 1750:2300
 
 # Function to run Hector with a given ini file
@@ -80,7 +91,11 @@ commit <-  substring(desc$RemoteSha, 1, 6)
 
 results <- bind_cols(version = version,
                      commit = commit, 
-                     comb_results)
+                     comb_results) %>% 
+  # Change the FCH4 variable name to be consistent
+  # with V35 & the benchmarking fxn.  
+  mutate(variable = if_else(variable == "FCH4", "RF_CH4", variable))
+
 
 # Writing results to a csv
 write.csv(results, OUTPUT_FILE, row.names = FALSE)
