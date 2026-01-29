@@ -1,0 +1,1 @@
+hector runs/materials assocaited with the gcam hector upgrade as part of CMP406, note that this uses a slightly different paramterization and historical emissions than the hector release version. there is an added challange for the future scenarios since those benchmarks would require different future emissions, probably coming from GCAM? 
