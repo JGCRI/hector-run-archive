@@ -25,7 +25,7 @@ AR6B.get_data <- function(file){
   ver <- unique(full_data$version)
   
   
-  if(ver %in% c("3.5.0", "3.2.0")){
+  if(ver %in% c("3.5.5", "3.5.0", "3.2.0")){
     
     aerosol_vars <- c("RF_BC", "RF_OC", "RF_NH3", "RF_SO2", "RF_aci")
     hist_warming <- c("global_tas")

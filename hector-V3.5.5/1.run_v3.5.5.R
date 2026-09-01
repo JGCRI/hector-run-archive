@@ -1,25 +1,28 @@
-# Script to run V3.5.0 Hector simulations.
+# Script to run V3.5.5 Hector simulations.
 
 # 0. Set Up --------------------------------------------------------------------
 # Using correct Hector version
+VERSION <- "3.5.5"
 
-#devtools::load_all("~/Documents/Hector-WD/hector/")
-remotes::install_github("jgcri/hector@v3.5.0")
-library(hector)
-# TODO this will need to be updated to the correct version! 
-stopifnot(packageVersion("hector") == "3.5.0")
+# TODO users may need to make changes as to how hector is installed/built. 
+devtools::load_all("~/Documents/Hector-WD/hector/")
+repo_release <- paste0("jgcri/hector@v", VERSION)
+# remotes::install_github(repo_release)
+stopifnot(packageVersion("hector") == VERSION)
 
-# Imports and constants
+# Required packages
 library(dplyr)
 library(hector)
 library(tidyr)
 
-VERSION_DIR <- here::here("hector-v3.5.0")
+# Define/create directories. 
+VERSION_DIR <- here::here(paste0("hector-v", VERSION))
 INPUT_DIR <- file.path(VERSION_DIR, "input")
 
 OUTPUT_DIR <- here::here("output")
-OUTPUT_FILE <- file.path(OUTPUT_DIR, "output-V3.5.0.csv")
+OUTPUT_FILE <- file.path(OUTPUT_DIR, paste0("output-V", VERSION, ".csv"))
 
+# Define some constants
 VARIABLES <- ALL_VARS()
 YEARS <- 1750:2300
 
