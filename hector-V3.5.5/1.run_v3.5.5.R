@@ -7,7 +7,7 @@ VERSION <- "3.5.5"
 # TODO users may need to make changes as to how hector is installed/built. 
 devtools::load_all("~/Documents/Hector-WD/hector/")
 repo_release <- paste0("jgcri/hector@v", VERSION)
-# remotes::install_github(repo_release)
+remotes::install_github(repo_release)
 stopifnot(packageVersion("hector") == VERSION)
 
 # Required packages
