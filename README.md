@@ -14,3 +14,4 @@ Idealized : 1pctCO2-4xext, 1pctCO2, abruptx0p5CO2, abruptx2CO2, abruptx4CO2, piC
 |:----------------|------:|------:|----------:|
 | v3.2.0          |       |   X   |    X      |
 | V3.5.0          |       |   X   |    X      |
+| V3.5.5          |       |   X   |    X      |
