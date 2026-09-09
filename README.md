@@ -1,5 +1,8 @@
 # hector-run-archive
 
+This project is not regularly maintained, it is updated with new [hector](https://github.com/JGCRI/hector) releases. Please use GitHub issues to track bugs and data requests.
+
+
 The materials inputs and scripts used to generate a standard set of runs for [Hector](https://github.com/JGCRI/hector) a reduced form complexity carbon-cycle 
 climate model. Minted results can be found at  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12696520.svg)](https://doi.org/10.5281/zenodo.12696520). 
 
